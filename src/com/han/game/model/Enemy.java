@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * 敌人主类
  * 
- * @author 张涵霖
+ * @author 十七
  *
  */
 public class Enemy extends GameObject {

@@ -7,7 +7,7 @@ import com.han.game.control.GetKeys;
 /**
  * 自机主类
  * 
- * @author 张涵霖
+ * @author 十七
  *
  */
 public class Player extends GameObject {

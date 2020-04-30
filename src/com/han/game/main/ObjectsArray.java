@@ -11,7 +11,7 @@ import com.han.game.model.Shoot;
 /**
  * 数组类
  * 
- * @author 张涵霖
+ * @author 十七
  *
  */
 public class ObjectsArray {

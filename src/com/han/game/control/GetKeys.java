@@ -3,7 +3,7 @@ package com.han.game.control;
 
 /**
  * 按键类
- * @author 张涵霖
+ * @author 十七
  *
  */
 public class GetKeys {

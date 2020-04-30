@@ -3,7 +3,7 @@ package com.han.game.model;
 import java.awt.Graphics;
 
 /**
- * @author 张涵霖
+ * @author 十七
  *敌人子弹类
  */
 public class Bullet extends GameObject {

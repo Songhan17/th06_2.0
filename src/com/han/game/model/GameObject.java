@@ -7,7 +7,7 @@ import com.han.game.main.GamePanel;
 /**
  * 所有的父类
  * 
- * @author 张涵霖
+ * @author 十七
  *
  */
 public class GameObject {

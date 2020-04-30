@@ -22,7 +22,7 @@ import com.han.game.model.Player;
 
 /**
  * 主类
- * @author 张涵霖
+ * @author 十七
  *
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener,
@@ -437,7 +437,7 @@ MouseMotionListener {
 
 	/**
 	 * 时间线程控制，间隔1s
-	 * @author 张涵霖
+	 * @author 十七
 	 *
 	 */
 	class TimeThread extends Thread {

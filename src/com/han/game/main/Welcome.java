@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 /**
  * Ö÷¿ò¼Ü
- * @author ÕÅº­ÁØ
+ * @author Ê®Æß
  *
  */
 public class Welcome {

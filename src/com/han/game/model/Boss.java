@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 /**
  * boss二阶段弹幕对象类
- * @author 张涵霖
+ * @author 十七
  *
  */
 public class Boss extends GameObject {
