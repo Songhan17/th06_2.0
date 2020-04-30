@@ -3,6 +3,7 @@ package com.han.game.model;
 import java.awt.Graphics;
 import java.util.Random;
 
+
 /**
  * 敌人主类
  * 
@@ -12,14 +13,21 @@ import java.util.Random;
 public class Enemy extends GameObject {
 	// 弹幕偏移量
 	double c0;
+	
+	private int a;
+	private int b;
+	private boolean isM;
 
 	public Enemy() {
-
+		a = 25;
+		b = 12;
+		isM = false;
 	}
 
 	public void setData(double d, double d1, double d2, double d3, int i, int j, int k, int l) {
 		super.setData(d, d1, d2, d3, i, j, k, l);
 		c0 = 0;
+
 	}
 
 	public void move() {
@@ -51,8 +59,16 @@ public class Enemy extends GameObject {
 				}
 			}
 		}
+		
+
+		
 		// 分数100的boss
 		if (type == 100) {
+			if (p.getTime3() > 14) {
+				p.setTime3(0);
+			}
+//			System.out.println(p.getTime3());
+	
 			if (life > 1000) {
 				count = 3;
 				if (py < 128) {
@@ -60,6 +76,7 @@ public class Enemy extends GameObject {
 				} else {
 					vy = 0;
 				}
+				
 				if (frame % 30 == 0) {
 					c0 = Math.random() * 30;
 					for (int i = 0; i < 360; i += 15) {
@@ -125,7 +142,7 @@ public class Enemy extends GameObject {
 				} else if (py <= 100) {
 					vy = 5;
 				}
-			} else if (life > 0) {
+			} else if (life > 250) {
 				vx = vy = 0;
 				count++;
 				if (count > 200) {
@@ -153,6 +170,43 @@ public class Enemy extends GameObject {
 					}
 				}
 			}
+			else if (life > 0) {
+				px = 280;
+				py = 320;
+				System.out.println(isM);
+				count++;
+				if (count > 300) {
+					count = 210;
+				}
+				if (count == 200) {
+					isM = true;
+					p.bullets.allErase();
+					p.setTime4(20);
+				}
+				
+				if ((tmp = p.bullets.getEmpty()) != null) {
+					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame /( a - p.getTime3()))) * b,
+							Math.sin((Math.PI * p.player.frame /( a - p.getTime3()))) * b, 18, 0, 0, 0);
+				}
+				if ((tmp = p.bullets.getEmpty()) != null) {
+					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2/5) * b,
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2/5) * b, 26, 0, 1, 0);
+				}
+				if ((tmp = p.bullets.getEmpty()) != null) {
+					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*2/5) * b,
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*2/5) * b, 18, 0, 0, 0);
+				}
+				if ((tmp = p.bullets.getEmpty()) != null) {
+					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*3/5) * b,
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*3/5) * b, 26, 0, 3, 0);
+				}
+				if ((tmp = p.bullets.getEmpty()) != null) {
+					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*4/5) * b,
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*4/5) * b, 26, 0, 2, 0);
+				}
+			}
+			
+			
 		}
 		// 涡轮弹幕
 		if (p.boss.getObject(0).type == 2) {
@@ -171,32 +225,44 @@ public class Enemy extends GameObject {
 
 		// 自机子弹撞击敌人
 		for (int i = 0; i < p.shoots.getArrayMax(); i++) {
-			if (!(tmp = p.shoots.getObject(i)).getExist() || Math.hypot(px - tmp.getPx(),
-					py - tmp.getPy()) >= 30)
-				continue;
-			if (life > 0) {
-				life--;
-				tmp.erase();
-			}
-			if (life <= 0) {
-				p.player.setScore(type);
-				double a = px;
-				double y = py;
-				erase();
-				if ((tmp = p.bullets.getEmpty()) != null) {
-					int temp = new Random().nextInt(40); // 生成0到30的随机数
-					if (temp < 10) {
-						tmp.setData(a, y, 0, 6, 5, 0, 0, 0);
-					} else if (temp < 33) {
-						tmp.setData(a, y, 0, 5, 6, 0, 0, 0);
-					} else if (temp < 38) {
-						tmp.setData(a, y, 0, 3, 8, 0, 0, 0);
-					} else {
-						tmp.setData(a, y, 0, 3, 9, 0, 0, 0);
+			if (isM == false) {
+				if (!(tmp = p.shoots.getObject(i)).getExist() || Math.hypot(px - tmp.getPx(),
+						py - tmp.getPy()) >= 30) {
+					continue;
+				}
+				if (life > 0) {
+					life--;
+					tmp.erase();
+				}
+				if (life <= 0) {
+					p.player.setScore(type);
+					double a = px;
+					double y = py;
+					erase();
+					if ((tmp = p.bullets.getEmpty()) != null) {
+						int temp = new Random().nextInt(40); // 生成0到30的随机数
+						if (temp < 10) {
+							tmp.setData(a, y, 0, 6, 5, 0, 0, 0);
+						} else if (temp < 33) {
+							tmp.setData(a, y, 0, 5, 6, 0, 0, 0);
+						} else if (temp < 38) {
+							tmp.setData(a, y, 0, 3, 8, 0, 0, 0);
+						} else {
+							tmp.setData(a, y, 0, 3, 9, 0, 0, 0);
+						}
 					}
 				}
 			}
 		}
+		
+		if (isM == true) {
+			if (p.getTime4() == 0) {
+				isM = false;
+				p.bgm[7].stop();
+				p.bgm[4].play();
+			}
+		}
+		
 		if (p.player.frame > 3300) {
 			if (life <= 0) {
 				System.out.println("执行");
@@ -205,7 +271,11 @@ public class Enemy extends GameObject {
 				p.bGM(6, 2);
 			}
 		}
+		
 	}
+
+	
+	
 
 	public void draw(Graphics g) {
 		super.draw(g);

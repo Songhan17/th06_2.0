@@ -1,6 +1,7 @@
 package com.han.game.model;
 
 import java.awt.Graphics;
+
 import com.han.game.control.GetKeys;
 
 /**
@@ -29,6 +30,7 @@ public class Player extends GameObject {
 	public void draw(Graphics g) {
 		super.draw(g);
 	}
+	
 
 	public void move(GetKeys getkeys) {
 		super.move();
@@ -69,6 +71,12 @@ public class Player extends GameObject {
 					if ((tmp = p.shoots.getEmpty()) != null)
 						tmp.setData(px + (double) i, py, 0, -24, 16, 0, 0, 0);
 				}
+//					if ((tmp = p.shoots.getEmpty()) != null)
+//						tmp.setData(px + (double) i, py,
+//								Math.cos((Math.PI*frame/36)) * 6,
+//								Math.sin((Math.PI*frame/36)) * 6
+//								, 16, 0, 0, 0);
+//				}
 
 				int i = 21;
 				if (power < 12)

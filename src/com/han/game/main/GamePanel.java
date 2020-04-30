@@ -39,6 +39,8 @@ MouseMotionListener {
 	private int back_y;
 	private int time;
 	private int time2;
+	private int time3;
+	private int time4;
 	
 	/**
 	 * 0：菜单
@@ -84,7 +86,9 @@ MouseMotionListener {
 		isM = false;
 		time = 0;
 		time2 = 0;
-		bgm = new AudioClip[7];
+		bgm = new AudioClip[8];
+		time3 = 0;
+		time4 = -1;
 
 		// 背景
 		ImageIcon imageicon1 = new ImageIcon(getClass().getResource("/images/bg.png"));
@@ -120,6 +124,7 @@ MouseMotionListener {
 	    bgm[4]=Applet.newAudioClip(getClass().getResource("/sounds/break.wav"));
 	    bgm[5]=Applet.newAudioClip(getClass().getResource("/sounds/skill.wav"));
 	    bgm[6]=Applet.newAudioClip(getClass().getResource("/sounds/th06_17.wav"));
+	    bgm[7]=Applet.newAudioClip(getClass().getResource("/sounds/don00.wav"));
 
 		// 开启焦点-按键
 		setFocusable(true);
@@ -132,6 +137,24 @@ MouseMotionListener {
 		GameObject.gameObjectInit(this);
 		gameLoop = new Thread(this);
 		gameLoop.start();
+		
+		new TimeThread().start();
+	}
+
+	public int getTime3() {
+		return time3;
+	}
+
+	public void setTime3(int time3) {
+		this.time3 = time3;
+	}
+	
+	public int getTime4() {
+		return time4;
+	}
+
+	public void setTime4(int time4) {
+		this.time4 = time4;
 	}
 
 	/**
@@ -219,7 +242,6 @@ MouseMotionListener {
 		g.setColor(Color.red);
 		g.drawRect(600, 600, 200, 10);
 		g.fillRect(600, 600, player.getLife() * 20, 11);
-		
 		
 
 		// 分数和火力
@@ -346,6 +368,9 @@ MouseMotionListener {
 		}
 	}
 	
+	
+
+	
 	public void setTime2(int time2) {
 		this.time2 = time2;
 	}
@@ -358,6 +383,7 @@ MouseMotionListener {
 	 *  bgm[4]=击破音乐
 	 *  bgm[5]=技能音乐
 	 *  bgm[6]=胜利音乐
+	 *  bgm[7]=计时音乐
 	 * @param i
 	 */
 	public void bGM(int i, int j) {
@@ -386,6 +412,18 @@ MouseMotionListener {
 		g.drawString("SCORE: " + player.getScore(), 600, 200);
 		g.drawString("POWER: " + player.getPower(), 600, 300);
 		g.drawString("BOOM: " + player.getBoom(), 600, 400);
+		
+		if (time4 == 20) {
+			bgm[7].loop();
+		}
+		if (time4 >= 0) {
+			g.setColor(new Color(0xFF0000));
+			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+			g.drawString("倒计时: " + time4, 600, 500);
+		}
+	
+		
+		
 	}
 
 	/**
@@ -397,6 +435,32 @@ MouseMotionListener {
 			g.drawImage(dbImage, 0, 0, null);
 	}
 
+	/**
+	 * 时间线程控制，间隔1s
+	 * @author 张涵霖
+	 *
+	 */
+	class TimeThread extends Thread {
+		public void run() {
+			while (true) {
+//				time3 += time4;
+//				if (time3 == 14) {
+//					time4 = -1;
+//				}
+//				if (time3 == 0) {
+//					time4 = 1;
+//				}
+				time3++;
+				time4--;
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	/**
 	 * 线程20毫秒
 	 */

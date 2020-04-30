@@ -1,4 +1,6 @@
 package com.han.game.control;
+
+
 /**
  * °´¼üÀà
  * @author ÕÅº­ÁØ
@@ -13,10 +15,13 @@ public class GetKeys {
 	public boolean z;
 	public boolean x;
 	public boolean shift;
+	
 
 	public GetKeys() {
 		up = down = left = right = false;
 		z = x = shift = false;
+		
+		
 	}
 
 	public void keyPressed(int i) {

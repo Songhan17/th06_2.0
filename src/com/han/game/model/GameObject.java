@@ -1,6 +1,7 @@
 package com.han.game.model;
 
 import java.awt.Graphics;
+
 import com.han.game.main.GamePanel;
 
 /**
@@ -121,46 +122,55 @@ public class GameObject {
 			g.drawImage(p.pImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py - 5, 129, 1, 144, 16, null);
 		}
+		
 		// 自机子弹2
 		if (size == 20) {
 			g.drawImage(p.pImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py - 5, 145, 1, 160, 16, null);
 		}
+		
 		// 自机B弹
 		if (size == 101) {
 			g.drawImage(p.boImg, (int) px - 260, (int) py - 300, (int) px + 260,
 					(int) py + 300, 0, 0, 256, 256, null);
 		}
+		
 		// 妖精子弹1
 		if (size == 15) {
 			g.drawImage(p.aImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py + 5, 18, 64, 30, 80, null);
 		}
+		
 		// 妖精子弹2
 		if (size == 23) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 128, 32, 144, 48, null);
 		}
+		
 		// boss子弹1
 		if (size == 24) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 160, 48, 176, 64, null);
 		}
+		
 		// boss子弹2
 		if (size == 25) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 96, 48, 112, 64, null);
 		}
+		
 		// boss子弹3
 		if (size == 32) {
 			g.drawImage(p.eImg2, (int) px - 42, (int) py - 42, (int) px + 42,
 					(int) py + 42, 0, 0, 64, 64, null);
 		}
+		
 		// boss子弹3
 		if (size == 17) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 16, (int) px + 8,
 					(int) py + 16, 72, 160, 88, 192, null);
 		}
+		
 		// boss子弹4
 		if (size == 26) {
 			int q = 16;
@@ -180,7 +190,14 @@ public class GameObject {
 			}
 		}
 		
+		// boss子弹3
+		if (size == 18) {
+			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
+					(int) py - 5, 48, 48, 64, 64, null);
+		}
+		
 	}
+	
 
 	public void move() {
 		px += vx;
