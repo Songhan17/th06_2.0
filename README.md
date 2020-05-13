@@ -15,3 +15,13 @@ X大招（二妹）
 
 2020-5-13
 添加了暂停功能 ESC，可以方便截图弹幕
+
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/1.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/2.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/3.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/4.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/5.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/6.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/7.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/8.png)
+![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/9.png)
