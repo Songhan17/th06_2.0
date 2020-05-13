@@ -429,6 +429,7 @@ MouseMotionListener {
 		g.drawString("SCORE: " + player.getScore(), 600, 200);
 		g.drawString("POWER: " + player.getPower(), 600, 300);
 		g.drawString("BOOM: " + player.getBoom(), 600, 400);
+		g.drawString("现在可以按键暂停：ESC", 600, 500);
 		
 		if (time4 == 20) {
 			bgm[7].loop();
