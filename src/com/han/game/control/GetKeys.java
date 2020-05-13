@@ -15,6 +15,7 @@ public class GetKeys {
 	public boolean z;
 	public boolean x;
 	public boolean shift;
+	public boolean esc;
 	
 
 	public GetKeys() {
@@ -39,6 +40,8 @@ public class GetKeys {
 			x = true;
 		if (i == 16)
 			shift = true;
+		if (i == 27)
+			esc = true;
 	}
 
 	public void keyReleased(int i) {
@@ -56,5 +59,7 @@ public class GetKeys {
 			x = false;
 		if (i == 16)
 			shift = false;
+		if (i == 27)
+			esc = false;
 	}
 }

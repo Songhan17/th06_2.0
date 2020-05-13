@@ -61,6 +61,8 @@ public class Player extends GameObject {
 				}
 			}
 		}
+		
+		
 
 		// 自机子弹模块
 		if (shotInterval < 1) {

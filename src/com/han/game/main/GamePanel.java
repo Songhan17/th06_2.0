@@ -21,8 +21,8 @@ import com.han.game.model.GameObject;
 import com.han.game.model.Player;
 
 /**
- * Ö÷Àà
- * @author Ê®Æß
+ * ä¸»ç±»
+ * @author åä¸ƒ
  *
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener,
@@ -43,13 +43,14 @@ MouseMotionListener {
 	private int time4;
 	
 	/**
-	 * 0£º²Ëµ¥
-	 * 1£ºËµÃ÷
-	 * 2£ºÍË³ö
-	 * 3£º¼ÓÔØÓÎÏ·
-	 * 4£ºËÀÍö
-	 * 5£º¼ÌÐø
-	 * 6£ºÊ¤Àû
+	 * 0ï¼šèœå•
+	 * 1ï¼šè¯´æ˜Ž
+	 * 2ï¼šé€€å‡º
+	 * 3ï¼šåŠ è½½æ¸¸æˆ
+	 * 4ï¼šæ­»äº¡
+	 * 5ï¼šç»§ç»­
+	 * 6ï¼šèƒœåˆ©
+	 * 7ï¼šæš‚åœ
 	 */
 	private int menuMode;
 
@@ -70,7 +71,7 @@ MouseMotionListener {
 	public Point checkP;
 	public AudioClip bgm[];
 	/**
-	 * ÊÇ·ñÎÞµÐ
+	 * æ˜¯å¦æ— æ•Œ
 	 */
 	public boolean isM;
 
@@ -90,7 +91,7 @@ MouseMotionListener {
 		time3 = 0;
 		time4 = -1;
 
-		// ±³¾°
+		// èƒŒæ™¯
 		ImageIcon imageicon1 = new ImageIcon(getClass().getResource("/images/bg.png"));
 		bgImg = imageicon1.getImage();
 		back_y = -bgImg.getHeight(null) + bgImg.getHeight(null);
@@ -116,7 +117,7 @@ MouseMotionListener {
 		ImageIcon imageicon9 = new ImageIcon(getClass().getResource("/images/timg.jpg"));
 		iconImg = imageicon9.getImage();
 		
-		// ÒôÀÖ
+		// éŸ³ä¹
 	    bgm[0]=Applet.newAudioClip(getClass().getResource("/sounds/th06_01.wav"));
 	    bgm[1]=Applet.newAudioClip(getClass().getResource("/sounds/th06_02.wav"));
 	    bgm[2]=Applet.newAudioClip(getClass().getResource("/sounds/th06_13.wav"));
@@ -126,11 +127,11 @@ MouseMotionListener {
 	    bgm[6]=Applet.newAudioClip(getClass().getResource("/sounds/th06_17.wav"));
 	    bgm[7]=Applet.newAudioClip(getClass().getResource("/sounds/don00.wav"));
 
-		// ¿ªÆô½¹µã-°´¼ü
+		// å¼€å¯ç„¦ç‚¹-æŒ‰é”®
 		setFocusable(true);
-		// Ìí¼Ó¼üÅÌ¼àÌýÊÂ¼þ
+		// æ·»åŠ é”®ç›˜ç›‘å¬äº‹ä»¶
 		addKeyListener(this);
-		// Ìí¼ÓÊó±ê¼àÌýÊÂ¼þ
+		// æ·»åŠ é¼ æ ‡ç›‘å¬äº‹ä»¶
 		addMouseListener(this);
 		addMouseMotionListener(this);
 
@@ -158,11 +159,11 @@ MouseMotionListener {
 	}
 
 	/**
-	 * ÓÎÏ·³õ´ÎÔØÈë
+	 * æ¸¸æˆåˆæ¬¡è½½å…¥
 	 */
 	public void gameSet() {
 		menuMode = 0;
-		// ÔØÈë½ÇÉ«ÐÅÏ¢
+		// è½½å…¥è§’è‰²ä¿¡æ¯
 		player.setData(312, 539, 0, 0, 1, 0, 0, 10);
 		shoots.allErase();
 		bullets.allErase();
@@ -171,7 +172,7 @@ MouseMotionListener {
 	}
 
 	/**
-	 * ÓÎÏ·×ÊÔ´¸üÐÂ
+	 * æ¸¸æˆèµ„æºæ›´æ–°
 	 */
 	public void gameUpdate() {
 		if (menuMode == 3) {
@@ -181,14 +182,19 @@ MouseMotionListener {
 			enemys.allMove();
 			boss.allMove();
 			player.move(getKeys);
+			if (getKeys.esc) {
+				setMenuMode(7);
+				getKeys.esc = false;
+			}
+			
 		}
 	}
 
 	/**
-	 * ÓÎÏ·×ÊÔ´ÔØÈë
+	 * æ¸¸æˆèµ„æºè½½å…¥
 	 */
 	private void gameRender() {
-		// ´´½¨´°¿Ú£¬Ë«»º³å
+		// åˆ›å»ºçª—å£ï¼ŒåŒç¼“å†²
 		if (dbImage == null) {
 			dbImage = createImage(850, 1000);
 			if (dbImage == null)
@@ -196,7 +202,7 @@ MouseMotionListener {
 			g = dbImage.getGraphics();
 		}
 
-		// ±³¾°µþ¼ÓÑ­»·
+		// èƒŒæ™¯å åŠ å¾ªçŽ¯
 		g.drawImage(bgImg, 0, back_y++, null);
 		g.drawImage(bgImg, 0, back_y - bgImg.getHeight(null), null);
 		if (back_y == bgImg.getHeight(null)) {
@@ -221,10 +227,10 @@ MouseMotionListener {
 			}
 		}
 
-		// bossÈë³¡Ìõ¼þ
+		// bosså…¥åœºæ¡ä»¶
 		if (player.getFrame() >= 3300) {
 			g.drawRect(30, 100, 500, 10);
-			// bossÑªÌõ½×¶Î¹ÜÀí
+			// bossè¡€æ¡é˜¶æ®µç®¡ç†
 			int life = enemys.getObject(0).getLife();
 
 			if (life > 1000) {
@@ -238,33 +244,33 @@ MouseMotionListener {
 				g.fillRect(30, 100, life, 11);
 			}
 		}
-		// Íæ¼ÒÑªÌõ
+		// çŽ©å®¶è¡€æ¡
 		g.setColor(Color.red);
 		g.drawRect(600, 600, 200, 10);
 		g.fillRect(600, 600, player.getLife() * 20, 11);
 		
 
-		// ·ÖÊýºÍ»ðÁ¦
+		// åˆ†æ•°å’Œç«åŠ›
 		paintScore(g);
 		
 		if (menuMode != 3) {
 			if (menuMode == 0) {
 				
 				bGM(0, 1);
-				// ÓÎÏ·¿ªÊ¼½çÃæ
+				// æ¸¸æˆå¼€å§‹ç•Œé¢
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/title00.png"));
 				Image menu = imageicon.getImage();
-				// ±êÌâ×ÖÌå
+				// æ ‡é¢˜å­—ä½“
 				imageicon = new ImageIcon(getClass().getResource("/images/front.png"));
 				Image title = imageicon.getImage();
-				// ¿ªÊ¼
+				// å¼€å§‹
 				imageicon = new ImageIcon(getClass().getResource("/images/start.png"));
 				Image start = imageicon.getImage();
-				// °ïÖú
+				// å¸®åŠ©
 				imageicon = new ImageIcon(getClass().getResource("/images/help.png"));
 				Image help = imageicon.getImage();
-				// ÍË³ö
+				// é€€å‡º
 				imageicon = new ImageIcon(getClass().getResource("/images/Exit.png"));
 				Image Exit = imageicon.getImage();
 				////////////////////////////////////////////
@@ -276,12 +282,12 @@ MouseMotionListener {
 						128, 0, 192, 64, null);
 				g.drawImage(title, 211 + 5 * i, 10, 338 + 5 * i, 137, 192, 0, 256, 64, null);
 				g.drawImage(title, 281 + 6 * i, 10, 408 + 6 * i, 137, 0, 64, 64, 128, null);
-				// °´Å¥
+				// æŒ‰é’®
 				g.drawImage(start, 600, 400, 800, 500, 0, 0, 100, 32, null);
 				g.drawImage(help, 600, 530, 800, 630, 0, 0, 52, 32, null);
 				g.drawImage(Exit, 600, 650, 800, 750, 0, 0, 100, 32, null);
-				// Êó±êÒÆ¶¯µ½°´Å¥ÊÇµÄÐ§¹û
-				// ¿ªÊ¼ÓÎÏ·
+				// é¼ æ ‡ç§»åŠ¨åˆ°æŒ‰é’®æ˜¯çš„æ•ˆæžœ
+				// å¼€å§‹æ¸¸æˆ
 				if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 						(moveP.getY() >= 400 && moveP.getY() <= 500)) {
 					Color c = g.getColor();
@@ -289,7 +295,7 @@ MouseMotionListener {
 					g.drawRect(600, 400, 200, 100);
 					g.setColor(c);
 				}
-				// ËµÃ÷
+				// è¯´æ˜Ž
 				if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 						(moveP.getY() >= 530 && moveP.getY() <= 630)) {
 					Color c = g.getColor();
@@ -297,7 +303,7 @@ MouseMotionListener {
 					g.drawRect(600, 530, 200, 100);
 					g.setColor(c);
 				}
-				// ÍË³ö
+				// é€€å‡º
 				if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 						(moveP.getY() >= 650 && moveP.getY() <= 750)) {
 					Color c = g.getColor();
@@ -305,7 +311,7 @@ MouseMotionListener {
 					g.drawRect(600, 650, 200, 100);
 					g.setColor(c);
 				}
-			// ËµÃ÷Ò³Ãæ
+			// è¯´æ˜Žé¡µé¢
 			} else if (menuMode == 1) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/slpl00a.png"));
@@ -321,10 +327,10 @@ MouseMotionListener {
 					g.drawRect(705, 920, 130, 990);
 					g.setColor(c);
 				}
-			// ÍË³ö
+			// é€€å‡º
 			} else if (menuMode == 2) {
             	System.exit(0);
-            // ËÀÍö	
+            // æ­»äº¡	
             } else if (menuMode == 4) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/result.png"));
@@ -344,14 +350,14 @@ MouseMotionListener {
 					g.drawRect(350, 670, 270, 180);
 					g.setColor(c);
 				}
-			// ¼ÌÐø
+			// ç»§ç»­
 			} else if (menuMode == 5) {
 				bullets.allErase();
 				player.setLife(10);
 				player.setBoom(3);
 				menuMode = 3;
 				isM = true;
-			// Ê¤Àû	
+			// èƒœåˆ©	
 			} else if (menuMode == 6) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/end03.jpg"));
@@ -364,6 +370,17 @@ MouseMotionListener {
 					g.drawRect(740, 200, 75, 520);
 					g.setColor(c);
 				}
+			// æš‚åœï¼ˆæ–¹ä¾¿æˆªå›¾ç”¨ï¼‰
+			} else if (menuMode == 7) {
+				ImageIcon imageicon = new ImageIcon(getClass().
+						getResource("/images/pause.png"));
+				Image dead = imageicon.getImage();
+				g.drawImage(dead, 0, 0, 800, 900, 0, 0, 850, 1000, null);
+				if (getKeys.esc) {
+					setMenuMode(3);
+					getKeys.esc = false;
+				}
+				
 			}
 		}
 	}
@@ -376,14 +393,14 @@ MouseMotionListener {
 	}
 
 	/**
-	 *  bgm[0]=±³¾°ÒôÀÖ
-	 *  bgm[1]=µÀÖÐÒôÀÖ
-	 *  bgm[2]=bossÒôÀÖ
-	 *  bgm[3]=±»»÷ÒôÀÖ
-	 *  bgm[4]=»÷ÆÆÒôÀÖ
-	 *  bgm[5]=¼¼ÄÜÒôÀÖ
-	 *  bgm[6]=Ê¤ÀûÒôÀÖ
-	 *  bgm[7]=¼ÆÊ±ÒôÀÖ
+	 *  bgm[0]=èƒŒæ™¯éŸ³ä¹
+	 *  bgm[1]=é“ä¸­éŸ³ä¹
+	 *  bgm[2]=bosséŸ³ä¹
+	 *  bgm[3]=è¢«å‡»éŸ³ä¹
+	 *  bgm[4]=å‡»ç ´éŸ³ä¹
+	 *  bgm[5]=æŠ€èƒ½éŸ³ä¹
+	 *  bgm[6]=èƒœåˆ©éŸ³ä¹
+	 *  bgm[7]=è®¡æ—¶éŸ³ä¹
 	 * @param i
 	 */
 	public void bGM(int i, int j) {
@@ -395,7 +412,7 @@ MouseMotionListener {
 	}
 	
 	/**
-	 * ¼ÓÔØÑ¡ÏîÄ£¿é
+	 * åŠ è½½é€‰é¡¹æ¨¡å—
 	 * @param i
 	 */
 	public void setMenuMode(int i) {
@@ -404,7 +421,7 @@ MouseMotionListener {
 	
 	/**
 	 * 
-	 * @param g »­·Ö£¬»­»ðÁ¦£¬Bµ¯
+	 * @param g ç”»åˆ†ï¼Œç”»ç«åŠ›ï¼ŒBå¼¹
 	 */
 	public void paintScore(Graphics g) {
 		g.setColor(new Color(0xFF0000));
@@ -419,7 +436,7 @@ MouseMotionListener {
 		if (time4 >= 0) {
 			g.setColor(new Color(0xFF0000));
 			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-			g.drawString("µ¹¼ÆÊ±: " + time4, 600, 500);
+			g.drawString("å€’è®¡æ—¶: " + time4, 600, 500);
 		}
 	
 		
@@ -427,7 +444,7 @@ MouseMotionListener {
 	}
 
 	/**
-	 * »­´°¿Ú³õÊ¼»¯
+	 * ç”»çª—å£åˆå§‹åŒ–
 	 */
 	private void paintScreen() {
 		Graphics g = getGraphics();
@@ -436,8 +453,8 @@ MouseMotionListener {
 	}
 
 	/**
-	 * Ê±¼äÏß³Ì¿ØÖÆ£¬¼ä¸ô1s
-	 * @author Ê®Æß
+	 * æ—¶é—´çº¿ç¨‹æŽ§åˆ¶ï¼Œé—´éš”1s
+	 * @author åä¸ƒ
 	 *
 	 */
 	class TimeThread extends Thread {
@@ -462,10 +479,10 @@ MouseMotionListener {
 	}
 	
 	/**
-	 * Ïß³Ì20ºÁÃë
+	 * çº¿ç¨‹20æ¯«ç§’
 	 */
 	public void run() {
-//		System.out.println("Ö´ÐÐ");
+//		System.out.println("æ‰§è¡Œ");
 		System.out.println(menuMode);
 		gameSet();
 		do {
@@ -474,21 +491,21 @@ MouseMotionListener {
 			paintScreen();
 			
 			
-			// ÆÁÄ»Ë¯Ãß
+			// å±å¹•ç¡çœ 
 			try {
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
-			// Íæ¼ÒËÀÍö¼ì²â
+			// çŽ©å®¶æ­»äº¡æ£€æµ‹
 			if (!player.getExist()) {
 				setMenuMode(4);
 			}
 		} while (true);
 	}
 
-	// °´¼ü¼àÌýÊÂ¼þ
+	// æŒ‰é”®ç›‘å¬äº‹ä»¶
 	public void keyTyped(KeyEvent e) {
 	}
 	public void keyPressed(KeyEvent e) {
@@ -498,14 +515,14 @@ MouseMotionListener {
 		getKeys.keyReleased(e.getKeyCode());
 	}
 
-	// »ñÈ¡Êó±ê½¹µã
+	// èŽ·å–é¼ æ ‡ç„¦ç‚¹
 	public void mouseDragged(MouseEvent e) {
 	}
 	public void mouseMoved(MouseEvent e) {
 		moveP = e.getPoint();
 	}
 
-	// Êó±ê¼àÌýÊÂ¼þ
+	// é¼ æ ‡ç›‘å¬äº‹ä»¶
 	public void mouseClicked(MouseEvent e) {
 	}
 	public void mouseReleased(MouseEvent e) {
@@ -516,51 +533,53 @@ MouseMotionListener {
 	}
 	public void mousePressed(MouseEvent e) {
 		checkP = e.getPoint();
-		// ¿ªÊ¼²Ëµ¥
+		// å¼€å§‹èœå•
 		if (menuMode == 0) {
-			// ¿ªÊ¼ÓÎÏ·
+			// å¼€å§‹æ¸¸æˆ
 			if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 					(moveP.getY() >= 400 && moveP.getY() <= 500)) {
 				gameSet();
 				setMenuMode(3);
 			}
-			// ËµÃ÷
+			// è¯´æ˜Ž
 			if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 					(moveP.getY() >= 530 && moveP.getY() <= 630)) {
 				setMenuMode(1);
 			}
-			// ÍË³ö
+			// é€€å‡º
 			if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 					(moveP.getY() >= 650 && moveP.getY() <= 750)) {
 				setMenuMode(2);
 			}
 		} 
-		// ËµÃ÷²Ëµ¥
+		// è¯´æ˜Žèœå•
 		if (menuMode == 1) {
 			if ((moveP.getX() >= 705 && moveP.getX() <= 835) &&
 					(moveP.getY() >= 920 && moveP.getY() <= 1000)) {
 				setMenuMode(0);
 			}
 		}
-		// ¼ÌÐøÒ³Ãæ
+		// ç»§ç»­é¡µé¢
 		if (menuMode == 4) {
-			// ¼ÌÐø
+			// ç»§ç»­
 			if ((moveP.getX() >= 20 && moveP.getX() <= 310) &&
 					(moveP.getY() >= 670 && moveP.getY() <= 850)) {
-				System.out.println("¼ÌÐø");
+				System.out.println("ç»§ç»­");
 				setMenuMode(5);
 			}
-			// »ØÖ÷²Ëµ¥
+			// å›žä¸»èœå•
             if ((moveP.getX() >= 350 && moveP.getX() <= 620) &&
 					(moveP.getY() >= 670 && moveP.getY() <= 850)) {
             	player.erase();
             	gameSet();
             	bgm[1].stop();
             	bgm[2].stop();
+            	bgm[7].stop();
+            	time4 = -1;
             	setMenuMode(0);
 			}
 		}
-		// Ê¤ÀûÒ³Ãæ
+		// èƒœåˆ©é¡µé¢
 		if (menuMode == 6) {
         	if ((moveP.getX() >= 740 && moveP.getX() <= 815) &&
 					(moveP.getY() >= 200 && moveP.getY() <= 720)) {
