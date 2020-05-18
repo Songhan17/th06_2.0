@@ -15,6 +15,8 @@ X大招（二妹）
 
 2020-5-13
 添加了暂停功能 ESC，可以方便截图弹幕
+2020-5-18
+添加了手动无敌功能，space，可以方便观赏弹幕
 
 ![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/1.png)
 ![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/2.png)
