@@ -16,11 +16,12 @@ public class GetKeys {
 	public boolean x;
 	public boolean shift;
 	public boolean esc;
+	public boolean space;
 	
 
 	public GetKeys() {
 		up = down = left = right = false;
-		z = x = shift = false;
+		z = x = shift = space = false;
 		
 		
 	}
@@ -42,6 +43,8 @@ public class GetKeys {
 			shift = true;
 		if (i == 27)
 			esc = true;
+		if (i == 32)
+			space = true;
 	}
 
 	public void keyReleased(int i) {
@@ -61,5 +64,7 @@ public class GetKeys {
 			shift = false;
 		if (i == 27)
 			esc = false;
+		if (i == 32)
+			space = false;
 	}
 }

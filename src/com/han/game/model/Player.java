@@ -5,9 +5,9 @@ import java.awt.Graphics;
 import com.han.game.control.GetKeys;
 
 /**
- * ×Ô»úÖ÷Àà
+ * è‡ªæœºä¸»ç±»
  * 
- * @author Ê®Æß
+ * @author åä¸ƒ
  *
  */
 public class Player extends GameObject {
@@ -34,7 +34,7 @@ public class Player extends GameObject {
 
 	public void move(GetKeys getkeys) {
 		super.move();
-		// ÒÆ¶¯ÔöÁ¿
+		// ç§»åŠ¨å¢é‡
 		vx = 0;
 		vy = 0;
 		if (getkeys.up) {
@@ -61,15 +61,30 @@ public class Player extends GameObject {
 				}
 			}
 		}
+		// æ˜¯å¦æ— æ•Œ
+		if (p.isM == false) {
+			if (getkeys.space) {
+				p.isM = true;
+				p.setTime(300);
+				getkeys.space = false;
+			}
+		}
+		if (p.isM == true) {
+			if (getkeys.space) {
+				p.isM = false;
+				p.setTime(0);
+				getkeys.space = false;
+			}
+		}
 		
 		
 
-		// ×Ô»ú×Óµ¯Ä£¿é
+		// è‡ªæœºå­å¼¹æ¨¡å—
 		if (shotInterval < 1) {
 			if (getkeys.z) {
 				shotInterval = 1;
 				for (int i = -8; i <= 8; i += 16) {
-					// ·¢Éä×Óµ¯
+					// å‘å°„å­å¼¹
 					if ((tmp = p.shoots.getEmpty()) != null)
 						tmp.setData(px + (double) i, py, 0, -24, 16, 0, 0, 0);
 				}
@@ -90,14 +105,14 @@ public class Player extends GameObject {
 				if (power < 3)
 					i = 0;
 				byte byte0;
-				// °´×¡shift£¬¾Û¼¯×Óµ¯
+				// æŒ‰ä½shiftï¼Œèšé›†å­å¼¹
 				if (getkeys.shift) {
 					byte0 = 6;
 				} else {
 					i *= 2;
 					byte0 = 12;
 				}
-				// ¸ù¾İ»ğÁ¦µ÷½Ú×Óµ¯µ¯Ä»
+				// æ ¹æ®ç«åŠ›è°ƒèŠ‚å­å¼¹å¼¹å¹•
 				for (int j = 90 - i; j <= 90 + i; j += byte0)
 					if ((tmp = p.shoots.getEmpty()) != null) {
 						tmp.setData(px, py, -Math.cos(Math.toRadians(j)) * 24,
@@ -106,7 +121,7 @@ public class Player extends GameObject {
 					}
 			}
 
-			// ÏŞÖÆÒÆ¶¯·¶Î§
+			// é™åˆ¶ç§»åŠ¨èŒƒå›´
 			if (px < 10) {
 				px = 10;
 			}
@@ -129,9 +144,9 @@ public class Player extends GameObject {
 			if (i >= p.bullets.getArrayMax()) {
 				break;
 			}
-			// Íæ¼Ò±»»÷ÖĞÊÂ¼ş
+			// ç©å®¶è¢«å‡»ä¸­äº‹ä»¶
 			if ((tmp = p.bullets.getObject(i)).getExist()) {
-				// ½±ÀøÊÂ¼ş
+				// å¥–åŠ±äº‹ä»¶
 				if (tmp.size == 5 || tmp.size == 6) {
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
@@ -164,7 +179,7 @@ public class Player extends GameObject {
 						}
 						break;
 					}
-					// Åö×Óµ¯
+					// ç¢°å­å¼¹
 				} else if (tmp.size == 32) {
 					if (32 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2)) && p.isM == false) {
@@ -192,10 +207,10 @@ public class Player extends GameObject {
 			}
 			i++;
 		} while (true);
-		// ×ó±ß
+		// å·¦è¾¹
 		if (frame < 360) {
 			stg1A_l();
-			// ÓÒ±ß
+			// å³è¾¹
 		} else if (frame < 660) {
 			stg1A_r();
 		} else if (frame >= 700) {
@@ -251,7 +266,7 @@ public class Player extends GameObject {
 	}
 
 	/**
-	 * Ğ¡Ñı¾«-×ó
+	 * å°å¦–ç²¾-å·¦
 	 */
 	private void stg1A_l() {
 		if (frame % 40 == 0 && (tmp = p.enemys.getEmpty()) != null) {
@@ -260,7 +275,7 @@ public class Player extends GameObject {
 	}
 
 	/**
-	 * Ğ¡Ñı¾«-ÓÒ
+	 * å°å¦–ç²¾-å³
 	 */
 	private void stg1A_r() {
 		if (frame % 40 == 15 && (tmp = p.enemys.getEmpty()) != null) {
@@ -268,7 +283,7 @@ public class Player extends GameObject {
 		}
 	}
 	/**
-	 * Ğ¡Ñı¾«-×óĞ±
+	 * å°å¦–ç²¾-å·¦æ–œ
 	 */
 	private void stg1A_lx() {
 		if (frame % 40 == 0 && (tmp = p.enemys.getEmpty()) != null) {
@@ -277,7 +292,7 @@ public class Player extends GameObject {
 	}
 
 	/**
-	 * Ğ¡Ñı¾«-ÓÒĞ±
+	 * å°å¦–ç²¾-å³æ–œ
 	 */
 	private void stg1A_rx() {
 		if (frame % 40 == 15 && (tmp = p.enemys.getEmpty()) != null) {
@@ -286,7 +301,7 @@ public class Player extends GameObject {
 	}
 
 	/**
-	 * ´óÑı¾«
+	 * å¤§å¦–ç²¾
 	 */
 	private void stg1B() {
 		if (frame % 30 == 7 && (tmp = p.enemys.getEmpty()) != null) {
