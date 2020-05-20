@@ -240,7 +240,7 @@ public class Enemy extends GameObject {
 					double y = py;
 					erase();
 					if ((tmp = p.bullets.getEmpty()) != null) {
-						int temp = new Random().nextInt(40); // 生成0到30的随机数
+						int temp = new Random().nextInt(40); // 生成0到40的随机数
 						if (temp < 10) {
 							tmp.setData(a, y, 0, 6, 5, 0, 0, 0);
 						} else if (temp < 33) {
