@@ -20,8 +20,8 @@ public class Player extends GameObject {
 	}
 
 	public void setData(double d, double d1, double d2, double d3,
-			int i, int j, int k, int l) {
-		super.setData(d, d1, d2, d3, i, j, k, l);
+			int i, int j, int k, int l, char m) {
+		super.setData(d, d1, d2, d3, i, j, k, l, 'n');
 		shotInterval = 0;
 		power = 0;
 		score = 0;
@@ -42,18 +42,27 @@ public class Player extends GameObject {
 		}
 		if (getkeys.down)
 			vy += 8;
-		if (getkeys.left)
+		if (getkeys.left) {
 			vx = -8;
-		if (getkeys.right)
+			anim = 'l';
+		}
+		if (getkeys.right) {
 			vx = 8;
+			anim = 'r';
+		}
 		if (getkeys.shift) {
 			vx *= 0.5;
 			vy *= 0.5;
 		}
+		// 动画控制
+		if (getkeys.left == false && getkeys.right == false) {
+			anim = 'n';
+		}
+		
 		if (getkeys.x) {
 			if (boom > 0 && life > 0) {
 				if ((tmp = p.shoots.getEmpty()) != null) {
-					tmp.setData(280, 900, 0, -20, 101, 0, 0, 0);
+					tmp.setData(280, 900, 0, -20, 101, 0, 0, 0, 'n');
 					p.bgm[5].play();
 					boom--;
 					p.bullets.allErase();
@@ -86,7 +95,7 @@ public class Player extends GameObject {
 				for (int i = -8; i <= 8; i += 16) {
 					// 发射子弹
 					if ((tmp = p.shoots.getEmpty()) != null)
-						tmp.setData(px + (double) i, py, 0, -24, 16, 0, 0, 0);
+						tmp.setData(px + (double) i, py, 0, -24, 16, 0, 0, 0, 'n');
 				}
 //					if ((tmp = p.shoots.getEmpty()) != null)
 //						tmp.setData(px + (double) i, py,
@@ -117,7 +126,7 @@ public class Player extends GameObject {
 					if ((tmp = p.shoots.getEmpty()) != null) {
 						tmp.setData(px, py, -Math.cos(Math.toRadians(j)) * 24,
 								-Math.sin(Math.toRadians(j)) * 24, 20, 0,
-								0, 0);
+								0, 0, 'n');
 					}
 			}
 
@@ -236,14 +245,14 @@ public class Player extends GameObject {
 				System.out.println("boss");
 				p.enemys.allErase();
 				tmp = p.enemys.getObject(0);
-				tmp.setData(280, 200, 0, 0, 4, 0, 100, 1500);
+				tmp.setData(280, 200, 0, 0, 4, 0, 100, 1500, 'n');
 			}
 		}
 		if (p.enemys.getObject(0).count == 5) {
 			p.bgm[4].play();
 			if ((tmp = p.boss.getEmpty()) != null) {
 				tmp.setData(p.enemys.getObject(0).px - 80, p.enemys.getObject(0).py + 10,
-						0, 0, 0, 0, 2, 1000);
+						0, 0, 0, 0, 2, 1000, 'n');
 			}
 		}
 		if (p.enemys.getObject(0).count == 50) {
@@ -270,7 +279,7 @@ public class Player extends GameObject {
 	 */
 	private void stg1A_l() {
 		if (frame % 40 == 0 && (tmp = p.enemys.getEmpty()) != null) {
-			tmp.setData(0, Math.random() * 96 + 48, 2, 0, 2, 0, 2, 25);
+			tmp.setData(0, Math.random() * 96 + 48, 2, 0, 2, 0, 2, 25, 'n');
 		}
 	}
 
@@ -279,7 +288,7 @@ public class Player extends GameObject {
 	 */
 	private void stg1A_r() {
 		if (frame % 40 == 15 && (tmp = p.enemys.getEmpty()) != null) {
-			tmp.setData(560, Math.random() * 96 + 48, -2, 0, 2, 0, 2, 25);
+			tmp.setData(560, Math.random() * 96 + 48, -2, 0, 2, 0, 2, 25, 'n');
 		}
 	}
 	/**
@@ -287,7 +296,7 @@ public class Player extends GameObject {
 	 */
 	private void stg1A_lx() {
 		if (frame % 40 == 0 && (tmp = p.enemys.getEmpty()) != null) {
-			tmp.setData(0, Math.random() * 96 + 48, 2, 1, 2, 0, 2, 30);
+			tmp.setData(0, Math.random() * 96 + 48, 2, 1, 2, 0, 2, 30, 'n');
 		}
 	}
 
@@ -296,7 +305,7 @@ public class Player extends GameObject {
 	 */
 	private void stg1A_rx() {
 		if (frame % 40 == 15 && (tmp = p.enemys.getEmpty()) != null) {
-			tmp.setData(560, Math.random() * 96 + 48, -2, 1, 2, 0, 2, 30);
+			tmp.setData(560, Math.random() * 96 + 48, -2, 1, 2, 0, 2, 30, 'n');
 		}
 	}
 
@@ -305,7 +314,7 @@ public class Player extends GameObject {
 	 */
 	private void stg1B() {
 		if (frame % 30 == 7 && (tmp = p.enemys.getEmpty()) != null) {
-			tmp.setData(Math.random() * 540, 0, 0, 1, 3, 0, 3, 60);
+			tmp.setData(Math.random() * 540, 0, 0, 1, 3, 0, 3, 60, 'n');
 		}
 	}
 

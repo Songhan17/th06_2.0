@@ -12,6 +12,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -70,6 +72,7 @@ MouseMotionListener {
 	public Point moveP = new Point(0, 0);
 	public Point checkP;
 	public AudioClip bgm[];
+	public int timepaint;
 	/**
 	 * 是否无敌
 	 */
@@ -90,6 +93,8 @@ MouseMotionListener {
 		bgm = new AudioClip[8];
 		time3 = 0;
 		time4 = -1;
+		timepaint = 1;
+		
 
 		// 背景
 		ImageIcon imageicon1 = new ImageIcon(getClass().getResource("/images/bg.png"));
@@ -140,6 +145,22 @@ MouseMotionListener {
 		gameLoop.start();
 		
 		new TimeThread().start();
+		
+		/**
+		 * 添加动画定时器
+		 * 2020-05-21 15:30:28
+		 */
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				timepaint++;
+				if (timepaint == 5) {
+					timepaint = 1;
+				}
+//				System.out.println(timepaint);
+			}
+		}, 1000, 140);
+		
 	}
 
 	public int getTime() {
@@ -172,7 +193,7 @@ MouseMotionListener {
 	public void gameSet() {
 		menuMode = 0;
 		// 载入角色信息
-		player.setData(312, 539, 0, 0, 1, 0, 0, 10);
+		player.setData(312, 539, 0, 0, 1, 0, 0, 10, 'n');
 		shoots.allErase();
 		bullets.allErase();
 		enemys.allErase();
@@ -263,7 +284,6 @@ MouseMotionListener {
 		
 		if (menuMode != 3) {
 			if (menuMode == 0) {
-				
 				bGM(0, 1);
 				// 游戏开始界面
 				ImageIcon imageicon = new ImageIcon(getClass().
@@ -298,6 +318,18 @@ MouseMotionListener {
 				// 开始游戏
 				if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 						(moveP.getY() >= 400 && moveP.getY() <= 500)) {
+					if (getKeys.down) {
+						moveP.setLocation(700, 580);
+						getKeys.down = false;
+					}
+					if (getKeys.up) {
+						moveP.setLocation(700, 700);
+						getKeys.up = false;
+					}
+					if (getKeys.z) {
+						setMenuMode(3);
+					}
+					
 					Color c = g.getColor();
 					g.setColor(Color.white);
 					g.drawRect(600, 400, 200, 100);
@@ -306,6 +338,19 @@ MouseMotionListener {
 				// 说明
 				if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 						(moveP.getY() >= 530 && moveP.getY() <= 630)) {
+					if (getKeys.down) {
+						moveP.setLocation(700, 700);
+						getKeys.down = false;
+					}
+					if (getKeys.up) {
+						moveP.setLocation(700, 450);
+						getKeys.up = false;
+					}
+					
+					if (getKeys.z) {
+						setMenuMode(1);
+					}
+					
 					Color c = g.getColor();
 					g.setColor(Color.yellow);
 					g.drawRect(600, 530, 200, 100);
@@ -314,11 +359,30 @@ MouseMotionListener {
 				// 退出
 				if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 						(moveP.getY() >= 650 && moveP.getY() <= 750)) {
+					if (getKeys.down) {
+						moveP.setLocation(700, 450);
+						getKeys.down = false;
+					}
+					if (getKeys.up) {
+						moveP.setLocation(700, 580);
+						getKeys.up = false;
+					}
+					if (getKeys.z) {
+						setMenuMode(2);
+					}
+					
 					Color c = g.getColor();
 					g.setColor(Color.pink);
 					g.drawRect(600, 650, 200, 100);
 					g.setColor(c);
 				}
+				
+				if (getKeys.down || getKeys.up) {
+					moveP.setLocation(700, 450);
+					getKeys.down = false;
+					getKeys.up = false;
+				}
+				
 			// 说明页面
 			} else if (menuMode == 1) {
 				ImageIcon imageicon = new ImageIcon(getClass().
@@ -335,6 +399,11 @@ MouseMotionListener {
 					g.drawRect(705, 920, 130, 990);
 					g.setColor(c);
 				}
+				
+				if (getKeys.x) {
+					setMenuMode(0);
+				}
+				
 			// 退出
 			} else if (menuMode == 2) {
             	System.exit(0);
@@ -346,6 +415,19 @@ MouseMotionListener {
 				g.drawImage(dead, 0, 0, 850, 1000, 0, 0, 640, 480, null);
 				if ((moveP.getX() >= 20 && moveP.getX() <= 310) &&
 						(moveP.getY() >= 670 && moveP.getY() <= 850)) {
+					
+					if (getKeys.left) {
+						moveP.setLocation(430, 720);
+						getKeys.left = false;
+					}
+					if (getKeys.right) {
+						moveP.setLocation(430, 720);
+						getKeys.right = false;
+					}
+					if (getKeys.z) {
+						setMenuMode(5);
+					}
+					
 					Color c = g.getColor();
 					g.setColor(Color.red);
 					g.drawRect(20, 670, 310, 180);
@@ -353,11 +435,37 @@ MouseMotionListener {
 				}
 				if ((moveP.getX() >= 350 && moveP.getX() <= 620) &&
 						(moveP.getY() >= 670 && moveP.getY() <= 850)) {
+					
+					if (getKeys.left) {
+						moveP.setLocation(100, 720);
+						getKeys.left = false;
+					}
+					if (getKeys.right) {
+						moveP.setLocation(100, 720);
+						getKeys.right = false;
+					}
+					if (getKeys.z) {
+						player.erase();
+		            	gameSet();
+		            	bgm[1].stop();
+		            	bgm[2].stop();
+		            	bgm[7].stop();
+		            	time4 = -1;
+		            	setMenuMode(0);
+					}
+					
 					Color c = g.getColor();
 					g.setColor(Color.green);
 					g.drawRect(350, 670, 270, 180);
 					g.setColor(c);
 				}
+				
+				if (getKeys.left || getKeys.right) {
+					moveP.setLocation(100, 720);
+					getKeys.left = false;
+					getKeys.right = false;
+				}
+				
 			// 继续
 			} else if (menuMode == 5) {
 				bullets.allErase();
@@ -436,7 +544,7 @@ MouseMotionListener {
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		g.drawString("SCORE: " + player.getScore(), 600, 200);
 		g.drawString("POWER: " + player.getPower(), 600, 300);
-		g.drawString("BOOM: " + player.getBoom(), 600, 400);
+		g.drawString("BOMB: " + player.getBoom(), 600, 400);
 		g.drawString("现在可以按键暂停：ESC", 580, 700);
 		g.drawString("现在可以按键无敌：SPACE", 580, 750);
 		
@@ -462,6 +570,7 @@ MouseMotionListener {
 			g.drawImage(dbImage, 0, 0, null);
 	}
 
+	
 	/**
 	 * 时间线程控制，间隔1s
 	 * @author 十七
@@ -493,7 +602,7 @@ MouseMotionListener {
 	 */
 	public void run() {
 //		System.out.println("执行");
-		System.out.println(menuMode);
+//		System.out.println(menuMode);
 		gameSet();
 		do {
 			gameUpdate();

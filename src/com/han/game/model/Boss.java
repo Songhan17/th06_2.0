@@ -14,8 +14,8 @@ public class Boss extends GameObject {
 	}
 	
 	public void setData(double d, double d1, double d2, double d3, 
-			 int i, int j, int k, int l) {
-	        super.setData(d, d1, d2, d3, i, j, k, l);
+			 int i, int j, int k, int l, char m) {
+	        super.setData(d, d1, d2, d3, i, j, k, l, 'n');
 	    }
 	
 	public void move() {

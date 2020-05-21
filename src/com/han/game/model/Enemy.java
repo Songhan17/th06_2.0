@@ -24,8 +24,8 @@ public class Enemy extends GameObject {
 		isM = false;
 	}
 
-	public void setData(double d, double d1, double d2, double d3, int i, int j, int k, int l) {
-		super.setData(d, d1, d2, d3, i, j, k, l);
+	public void setData(double d, double d1, double d2, double d3, int i, int j, int k, int l, char m) {
+		super.setData(d, d1, d2, d3, i, j, k, l, 'n');
 		c0 = 0;
 
 	}
@@ -40,7 +40,7 @@ public class Enemy extends GameObject {
 			if (frame % 30 == 0) {
 				th = playerTh();
 				if ((tmp = p.bullets.getEmpty()) != null) {
-					tmp.setData(px, py, Math.cos(th) * 6, Math.sin(th) * 6, 15, 0, 0, 0);
+					tmp.setData(px, py, Math.cos(th) * 6, Math.sin(th) * 6, 15, 0, 0, 0, 'n');
 				}
 			}
 		}
@@ -54,7 +54,7 @@ public class Enemy extends GameObject {
 				for (int i = 0; i < 360; i += 60) {
 					if ((tmp = p.bullets.getEmpty()) != null) {
 						tmp.setData(px, py, Math.cos(Math.toRadians((double) i + c0)) * 6,
-								Math.sin(Math.toRadians((double) i + c0)) * 6, 23, 0, 0, 0);
+								Math.sin(Math.toRadians((double) i + c0)) * 6, 23, 0, 0, 0, 'n');
 					}
 				}
 			}
@@ -82,19 +82,19 @@ public class Enemy extends GameObject {
 					for (int i = 0; i < 360; i += 15) {
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px, py, Math.cos(Math.toRadians((double) i + c0)) * 8,
-									Math.sin(Math.toRadians((double) i + c0)) * 8, 24, 0, 0, 0);
+									Math.sin(Math.toRadians((double) i + c0)) * 8, 24, 0, 0, 0, 'n');
 						}
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px - 50, py + 50, Math.cos(Math.toRadians((double) i + c0)) * 6,
-									Math.sin(Math.toRadians((double) i + c0)) * 6, 24, 0, 0, 0);
+									Math.sin(Math.toRadians((double) i + c0)) * 6, 24, 0, 0, 0, 'n');
 						}
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px + 50, py + 50, Math.cos(Math.toRadians((double) i + c0)) * 6,
-									Math.sin(Math.toRadians((double) i + c0)) * 6, 24, 0, 0, 0);
+									Math.sin(Math.toRadians((double) i + c0)) * 6, 24, 0, 0, 0, 'n');
 						}
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px, py + 100, Math.cos(Math.toRadians((double) i + c0)) * 6,
-									Math.sin(Math.toRadians((double) i + c0)) * 6, 24, 0, 0, 0);
+									Math.sin(Math.toRadians((double) i + c0)) * 6, 24, 0, 0, 0, 'n');
 						}
 					}
 				}
@@ -107,7 +107,7 @@ public class Enemy extends GameObject {
 				if (frame % 60 == 0) {
 					th = playerTh();
 					if ((tmp = p.bullets.getEmpty()) != null) {
-						tmp.setData(px, py, Math.cos(th) * 6, Math.sin(th) * 6, 32, 0, 0, 0);
+						tmp.setData(px, py, Math.cos(th) * 6, Math.sin(th) * 6, 32, 0, 0, 0, 'n');
 					}
 				}
 			} else if (life > 300) {
@@ -120,13 +120,13 @@ public class Enemy extends GameObject {
 					for (int i = 0; i < 180; i += 15) {
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px - 15, py, Math.cos(Math.toRadians((double) i)) * 6,
-									Math.sin(Math.toRadians((double) i)) * 6, 17, 0, 0, 0);
+									Math.sin(Math.toRadians((double) i)) * 6, 17, 0, 0, 0, 'n');
 						}
 					}
 					for (int i = 0; i < 180; i += 15) {
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px + 25, py, Math.cos(Math.toRadians((double) i)) * 6,
-									Math.sin(Math.toRadians((double) i)) * 6, 17, 0, 0, 0);
+									Math.sin(Math.toRadians((double) i)) * 6, 17, 0, 0, 0, 'n');
 						}
 					}
 				}
@@ -152,11 +152,11 @@ public class Enemy extends GameObject {
 					for (int i = 0; i < 360; i += 15) {
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px - 100, py, Math.cos(Math.toRadians((double) i) + 10) * 6,
-									Math.sin(Math.toRadians((double) i)) * 6, 26, 0, 1, 0);
+									Math.sin(Math.toRadians((double) i)) * 6, 26, 0, 1, 0, 'n');
 						}
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px + 100, py, Math.cos(Math.toRadians((double) i)) * 6,
-									Math.sin(Math.toRadians((double) i) + 10) * 6, 26, 0, 2, 0);
+									Math.sin(Math.toRadians((double) i) + 10) * 6, 26, 0, 2, 0, 'n');
 						}
 					}
 				}
@@ -165,7 +165,7 @@ public class Enemy extends GameObject {
 					for (int i = 0; i < 360; i += 15) {
 						if ((tmp = p.bullets.getEmpty()) != null) {
 							tmp.setData(px, py, Math.cos(Math.toRadians((double) i + c0)) * 6,
-									Math.sin(Math.toRadians((double) i + c0)) * 6, 26, 0, 3, 0);
+									Math.sin(Math.toRadians((double) i + c0)) * 6, 26, 0, 3, 0, 'n');
 						}
 					}
 				}
@@ -186,24 +186,34 @@ public class Enemy extends GameObject {
 				
 				if ((tmp = p.bullets.getEmpty()) != null) {
 					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame /( a - p.getTime3()))) * b,
-							Math.sin((Math.PI * p.player.frame /( a - p.getTime3()))) * b, 18, 0, 0, 0);
+							Math.sin((Math.PI * p.player.frame /( a - p.getTime3()))) * b, 18, 0, 0, 0, 'n');
 				}
 				if ((tmp = p.bullets.getEmpty()) != null) {
 					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2/5) * b,
-							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2/5) * b, 26, 0, 1, 0);
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2/5) * b, 26, 0, 1, 0, 'n');
 				}
 				if ((tmp = p.bullets.getEmpty()) != null) {
 					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*2/5) * b,
-							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*2/5) * b, 18, 0, 0, 0);
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*2/5) * b, 18, 0, 0, 0, 'n');
 				}
 				if ((tmp = p.bullets.getEmpty()) != null) {
 					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*3/5) * b,
-							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*3/5) * b, 26, 0, 3, 0);
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*3/5) * b, 26, 0, 3, 0, 'n');
 				}
 				if ((tmp = p.bullets.getEmpty()) != null) {
 					tmp.setData(px, py, Math.cos((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*4/5) * b,
-							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*4/5) * b, 26, 0, 2, 0);
+							Math.sin((Math.PI * p.player.frame / ( a - p.getTime3())) + Math.PI*2*4/5) * b, 26, 0, 2, 0, 'n');
 				}
+			}
+			
+			if (vx > 0) {
+				anim = 'r';
+			}
+			if (vx < 0) {
+				anim = 'l';
+			}
+			if (vx == 0){
+				anim = 'n';
 			}
 			
 			
@@ -216,7 +226,7 @@ public class Enemy extends GameObject {
 					if ((tmp = p.bullets.getEmpty()) != null) {
 						tmp.setData(p.boss.getObject(0).px, p.boss.getObject(0).py,
 								Math.cos(Math.toRadians((double) i + c0)) * 6,
-								Math.sin(Math.toRadians((double) i + c0)) * 6, 25, 0, 0, 0);
+								Math.sin(Math.toRadians((double) i + c0)) * 6, 25, 0, 0, 0, 'n');
 
 					}
 				}
@@ -242,13 +252,13 @@ public class Enemy extends GameObject {
 					if ((tmp = p.bullets.getEmpty()) != null) {
 						int temp = new Random().nextInt(40); // 生成0到40的随机数
 						if (temp < 10) {
-							tmp.setData(a, y, 0, 6, 5, 0, 0, 0);
+							tmp.setData(a, y, 0, 6, 5, 0, 0, 0, 'n');
 						} else if (temp < 33) {
-							tmp.setData(a, y, 0, 5, 6, 0, 0, 0);
+							tmp.setData(a, y, 0, 5, 6, 0, 0, 0, 'n');
 						} else if (temp < 38) {
-							tmp.setData(a, y, 0, 3, 8, 0, 0, 0);
+							tmp.setData(a, y, 0, 3, 8, 0, 0, 0, 'n');
 						} else {
-							tmp.setData(a, y, 0, 3, 9, 0, 0, 0);
+							tmp.setData(a, y, 0, 3, 9, 0, 0, 0, 'n');
 						}
 					}
 				}
@@ -271,7 +281,6 @@ public class Enemy extends GameObject {
 				p.bGM(6, 2);
 			}
 		}
-		
 	}
 
 	
