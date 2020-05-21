@@ -17,6 +17,9 @@
 <Br/>  添加了暂停功能 ESC，可以方便截图弹幕
 <Br/>2020-5-18
 <Br/>  添加了手动无敌功能，space，可以方便观赏弹幕
+<Br/>2020-5-21
+<Br/>  增加人物动画效果，包括移动动画。
+<Br/>  增加全键盘操作，现在可以不需要鼠标了！
 
 ![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/1.png)
 ![image](https://github.com/Songhan17/th06_1.5/blob/master/pictures/2.png)
